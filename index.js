@@ -26,6 +26,8 @@ mongoose.connect(
 
 //We use this body parser to be able to access data that gets sent to us
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.get("/", (req, res) => {
   // find everything that matches todo
@@ -39,6 +41,8 @@ app.get("/get-item/:id", (req, res) => {
 
 app.post("/add-item", (req, res) => {
   // adda a new item in the db
+
+  console.log(req.body)
   const item = new TodoItem(req.body);
   item
     .save()
